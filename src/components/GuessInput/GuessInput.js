@@ -1,20 +1,16 @@
 import { useState } from "react";
 
-function GuessInput() {
+function GuessInput({ handleInput }) {
   const [input, setInput] = useState("");
   const minimumInput = 5;
   const maximumInput = 5;
-  const handleInput = (input) => {
-    return {
-      guess: input.toUpperCase(),
-    };
-  };
+
   return (
     <form
       className="guess-input-wrapper"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(handleInput(input));
+        handleInput(input.toUpperCase());
         setInput("");
       }}
     >
