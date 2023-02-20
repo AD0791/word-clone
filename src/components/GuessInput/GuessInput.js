@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-function GuessInput({ handleInput }) {
-  const [input, setInput] = useState("");
+function GuessInput({ handleInput, gameStatus }) {
+  const [guess, setGuess] = useState("");
   const minimumInput = 5;
   const maximumInput = 5;
 
@@ -10,20 +10,24 @@ function GuessInput({ handleInput }) {
       className="guess-input-wrapper"
       onSubmit={(e) => {
         e.preventDefault();
-        handleInput(input.toUpperCase());
-        setInput("");
+        handleInput(guess.toUpperCase());
+        setGuess("");
       }}
     >
       <label htmlFor="guess-input">Enter guess:</label>
       <input
         id="guess-input"
         type="text"
-        value={input}
+        value={guess}
         onChange={(event) => {
-          setInput(event.target.value);
+          setGuess(event.target.value);
         }}
         minLength={minimumInput}
         maxLength={maximumInput}
+        required
+        pattern="[a-zA-Z]{5}"
+        title="5 letter word"
+        disabled={gameStatus !== "running"}
       />
     </form>
   );
